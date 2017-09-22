@@ -8,7 +8,7 @@ Current Version: 1.01
 1. INSTALLATION
 ^^^^^^^^^^^^^^^
 
-Change to the directory where you have installed ``Flib``
+Change to the directory where you have installed ``Flib-Coevo``
 and type:
 
 .. code:: bash
@@ -55,15 +55,15 @@ To generate a SAINT2-compliant library, the Python script ``scripts/process_new.
 ^^^^^^^^^^^^^^^^
 In order to configure Flib-Coevo, alter the path names on the file ``run_flib_coevo_pipeline.sh``.
 
-Make sure to provide the correct paths to Flib and to the local version of the PDB.
+Make sure to provide the correct paths to Flib-Coevo and to the local version of the PDB.
 
 4. RUNNING FLIB-COEVO
 ^^^^^^^^^^^^^^^^^^^^^
-To generate fragment libraries for protein structure prediction using Flib, you should use the script ``run_flib_coevo_pipeline.sh`` as follows:
+To generate fragment libraries for protein structure prediction using Flib-Coevo, you should use the script ``run_flib_coevo_pipeline.sh`` as follows:
 
 .. code:: bash
    
-   $> export FLIB=<PATH TO FLIB>
+   $> export FLIB=<PATH TO FLIB-COEVO>
    $> $FLIB/run_flib_coevo_pipeline.sh 1AIU
 
 The following example should generate the fragment library file "1AIU.lib".
