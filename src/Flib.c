@@ -867,7 +867,7 @@ int main(int argc,char* argv[])
 					if(!VALIDATE)
 					{
 							new_frag->line[strlen(new_frag->line)-1]='\t';
-                            if(!COEVO || (COEVO && !COEVO_ONLY && ( !flag || dist < 8.0 ) ) || (COEVO && COEVO_ONLY && flag  /*&& dist < 8.0*/) )
+                            if(!COEVO || (COEVO && !COEVO_ONLY && ( !flag || dist < 8.0 ) ) || (COEVO && COEVO_ONLY && flag  && dist < 8.0) )
                             {
     							printf("%s%.2lf",new_frag->line,new_score);	
                                 printed=1;
@@ -875,7 +875,7 @@ int main(int argc,char* argv[])
 					}
 					else
                     {
-                        if(!COEVO || (COEVO && !COEVO_ONLY && ( !flag || dist < 8.0 ) ) || (COEVO && COEVO_ONLY && flag /* && dist < 8.0 */) )
+                        if(!COEVO || (COEVO && !COEVO_ONLY && ( !flag || dist < 8.0 ) ) || (COEVO && COEVO_ONLY && flag && dist < 8.0 ) )
                         {
     						printf("%s\t%.2lf",new_frag->line,new_score);	
                             printed=1;
@@ -884,7 +884,7 @@ int main(int argc,char* argv[])
                     if(PRINT_DIST && printed)
                     {
                         if(flag)
-                            printf("\t%.2f\n",dist);
+                            printf("\t%d\t%d\t%d\t%d\t%.2f\n",Contacts[ct][0],Contacts[ct][1],con1+1,con2+1,dist);
                         else
                             printf("\t-1.0\n");
                     }
@@ -1009,7 +1009,7 @@ int main(int argc,char* argv[])
 					if(!VALIDATE)
 					{
 							new_frag->line[strlen(new_frag->line)-1]='\t';
-                            if(!COEVO || (COEVO && !COEVO_ONLY && ( !flag || dist < 8.0 ) ) || (COEVO && COEVO_ONLY && flag /* && dist < 8.0 */) )
+                            if(!COEVO || (COEVO && !COEVO_ONLY && ( !flag || dist < 8.0 ) ) || (COEVO && COEVO_ONLY && flag && dist < 8.0 ) )
                             {
                                 printed=1;
                                 printf("%s%.2lf",new_frag->line,new_score);
@@ -1017,7 +1017,7 @@ int main(int argc,char* argv[])
 					}
 					else
                     {
-                        if(!COEVO || (COEVO && !COEVO_ONLY && ( !flag || dist < 8.0 ) ) || (COEVO && COEVO_ONLY && flag /* && dist < 8.0 */) )
+                        if(!COEVO || (COEVO && !COEVO_ONLY && ( !flag || dist < 8.0 ) ) || (COEVO && COEVO_ONLY && flag && dist < 8.0 ) )
                         {
                             printed=1;
                             printf("%s\t%.2lf",new_frag->line,new_score);
@@ -1026,7 +1026,7 @@ int main(int argc,char* argv[])
                     if(PRINT_DIST && printed)
                     {   
                         if(flag)
-                            printf("\t%.2f\n",dist);
+                            printf("\t%d\t%d\t%d\t%d\t%.2f\n",Contacts[ct][0],Contacts[ct][1],con1+1,con2+1,dist);
                         else
                             printf("\t-1.0\n");
                     }
