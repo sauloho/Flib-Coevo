@@ -204,7 +204,26 @@ if 'hhblits' in _DBS_TO_INSTALL and do_install(_hhblits_db_dir, check_file=insta
     os.makedirs(_hhblits_db_dir)
     os.chdir(_hhblits_db_dir)
     tarball = wget.download("http://wwwuser.gwdg.de/~compbiol/data/hhsuite/databases/hhsuite_dbs/{0}.tgz".format(_HHBLITS_DB_NAME))
-    with tarfile.open(tarball) as tar: tar.extractall()
+                                       def is_within_directory(directory, target):
+                                           
+                                           abs_directory = os.path.abspath(directory)
+                                           abs_target = os.path.abspath(target)
+                                       
+                                           prefix = os.path.commonprefix([abs_directory, abs_target])
+                                           
+                                           return prefix == abs_directory
+                                       
+                                       def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
+                                       
+                                           for member in tar.getmembers():
+                                               member_path = os.path.join(path, member.name)
+                                               if not is_within_directory(path, member_path):
+                                                   raise Exception("Attempted Path Traversal in Tar File")
+                                       
+                                           tar.extractall(path, members, numeric_owner=numeric_owner) 
+                                           
+                                       
+                                       safe_extract(tar)
     if os.path.isfile(tarball) and os.path.isfile(hhblits_db): os.remove(tarball)
     os.chdir(_DEPENDENCY_DIR)
         
@@ -238,7 +257,26 @@ if 'blast' in _DBS_TO_INSTALL and do_install(_blast_db_dir, check_file=install_f
     os.makedirs(_blast_db_dir)
     os.chdir(_blast_db_dir)
     tarball = wget.download("ftp://ftp.ncbi.nlm.nih.gov/blast/db/pdbaa.tar.gz".format(_BLAST_DB_NAME))
-    with tarfile.open(tarball) as tar: tar.extractall()
+                                       def is_within_directory(directory, target):
+                                           
+                                           abs_directory = os.path.abspath(directory)
+                                           abs_target = os.path.abspath(target)
+                                       
+                                           prefix = os.path.commonprefix([abs_directory, abs_target])
+                                           
+                                           return prefix == abs_directory
+                                       
+                                       def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
+                                       
+                                           for member in tar.getmembers():
+                                               member_path = os.path.join(path, member.name)
+                                               if not is_within_directory(path, member_path):
+                                                   raise Exception("Attempted Path Traversal in Tar File")
+                                       
+                                           tar.extractall(path, members, numeric_owner=numeric_owner) 
+                                           
+                                       
+                                       safe_extract(tar)
     if os.path.isfile(tarball): os.remove(tarball)
     os.chdir(_DEPENDENCY_DIR)
 
@@ -271,7 +309,26 @@ if 'blast' in _PROGS_TO_INSTALL and do_install(blast_dir, check_file=install_fna
         tarball = wget.download("ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy/2.2.26/blast-2.2.26-x64-linux.tar.gz")
     elif sys.platform == "darwin":
         tarball = wget.download("ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy/2.2.26/blast-2.2.26-universal-macosx.tar.gz")
-    with tarfile.open(tarball) as tar: tar.extractall()
+                                       def is_within_directory(directory, target):
+                                           
+                                           abs_directory = os.path.abspath(directory)
+                                           abs_target = os.path.abspath(target)
+                                       
+                                           prefix = os.path.commonprefix([abs_directory, abs_target])
+                                           
+                                           return prefix == abs_directory
+                                       
+                                       def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
+                                       
+                                           for member in tar.getmembers():
+                                               member_path = os.path.join(path, member.name)
+                                               if not is_within_directory(path, member_path):
+                                                   raise Exception("Attempted Path Traversal in Tar File")
+                                       
+                                           tar.extractall(path, members, numeric_owner=numeric_owner) 
+                                           
+                                       
+                                       safe_extract(tar)
     if os.path.isfile(tarball): os.remove(tarball)
     shutil.move("blast-2.2.26", blast_dir)
     
@@ -302,7 +359,26 @@ if 'psipred' in _PROGS_TO_INSTALL and do_install(psipred_dir, check_file=install
 
     # tarball = wget.download("http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/psipred.4.0.tar.gz")
     tarball = wget.download("https://github.com/psipred/psipred/archive/v4.0.tar.gz")
-    with tarfile.open(tarball) as t_in: t_in.extractall(psipred_dir)
+                                        def is_within_directory(directory, target):
+                                            
+                                            abs_directory = os.path.abspath(directory)
+                                            abs_target = os.path.abspath(target)
+                                        
+                                            prefix = os.path.commonprefix([abs_directory, abs_target])
+                                            
+                                            return prefix == abs_directory
+                                        
+                                        def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
+                                        
+                                            for member in tar.getmembers():
+                                                member_path = os.path.join(path, member.name)
+                                                if not is_within_directory(path, member_path):
+                                                    raise Exception("Attempted Path Traversal in Tar File")
+                                        
+                                            tar.extractall(path, members, numeric_owner=numeric_owner) 
+                                            
+                                        
+                                        safe_extract(t_in, psipred_dir)
     if os.path.isfile(tarball): os.remove(tarball)
     for f in glob.glob(os.path.join(psipred_dir, "*")):
         for _f in glob.glob(os.path.join(f, "*")):
